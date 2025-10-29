@@ -13,7 +13,7 @@ const pool = new Pool({
   port: parseInt(process.env.DB_PORT || '5432'),
   ssl: {
     
-    rejectUnauthorized: false // You might want to set this to true in production and provide proper CA certificates
+    rejectUnauthorized: true // You might want to set this to true in production and provide proper CA certificates
   }
 });
 
