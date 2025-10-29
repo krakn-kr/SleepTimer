@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx server/index.ts",
-    "build": "vite build",
+    "build": "tsc --project api/tsconfig.json && vite build",
     "start": "cross-env NODE_ENV=production node api/index.js",
-    "vercel-build": "vite build"
+    "vercel-build": "tsc --project api/tsconfig.json && vite build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

@@ -8,6 +8,14 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+// Set correct MIME types
+app.use((req, res, next) => {
+  if (req.url?.endsWith('.js')) {
+    res.type('application/javascript')
+  }
+  next()
+})
+
 // Initialize Express app with routes
 await registerRoutes(app)
 
