@@ -12,9 +12,11 @@ const pool = new Pool({
   database: process.env.DB_NAME || 'screenlock',
   port: parseInt(process.env.DB_PORT || '5432'),
   ssl: {
-    
-    rejectUnauthorized: false // You might want to set this to true in production and provide proper CA certificates
-  }
+    rejectUnauthorized: false
+  },
+  connectionTimeoutMillis: 5000,
+  max: 20,
+  idleTimeoutMillis: 30000,
 });
 
 // Test the database connection
@@ -24,6 +26,7 @@ pool.connect()
   })
   .catch((err) => {
     console.error('Error connecting to PostgreSQL database:', err.message);
+    process.exit(1); // Exit if we can't connect to the database
   });
 
 export const db = drizzle(pool, { schema });
